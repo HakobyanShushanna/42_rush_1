@@ -6,59 +6,58 @@
 /*   By: shhakoby <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 12:58:48 by shhakoby          #+#    #+#             */
-/*   Updated: 2025/09/07 14:02:56 by shhakoby         ###   ########.fr       */
+/*   Updated: 2025/09/07 16:01:24 by shhakoby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	num_row_column(int *arr)
+int	max_count(int *arr, int size)
 {
 	int	max;
 	int	i;
+	int	ind;
 
-	max = *arr;
+	max = arr[0];
 	i = 1;
-	while (*arr)
+	ind = 1;
+	while (ind < size)
 	{
-		if (max < *arr)
+		if (max < arr[ind])
 		{
-			max = *arr;
+			max = arr[ind];
 			i++;
 		}
-		arr++;
+		ind++;
 	}
 	return (i);
 }
 
-int	reverse_num_row_column(int *arr)
+int	reverse_max_count(int *arr, int size)
 {
 	int	max;
 	int	i;
-	int	*first;
+	int	ind;
 
-	first = arr;
-	while (*arr)
-		arr++;
-	arr--;
-	max = *arr;
-	i = 0;
-	while (arr != first)
+	ind = size - 1;
+	max = arr[ind];
+	i = 1;
+	while (ind >= 0)
 	{
-		arr--;
-		if ((*arr) > max)
+		if (arr[ind] > max)
 		{
-			max = *arr;
+			max = arr[ind];
 			i++;
 		}
+		ind--;
 	}
 	return (i);
 }
 
-int	check_row_column(int left, int right, int *arr)
+int	check_line(int left, int right, int *arr, int size)
 {
 	int	l_n;
 	int	r_n;
 
-	l_n = num_row_column(&arr[0]);
-	r_n = reverse_num_row_column(&arr[0]);
+	l_n = max_count(arr, size);
+	r_n = reverse_max_count(arr, size);
 	return ((l_n == left) && (r_n == right));
 }
